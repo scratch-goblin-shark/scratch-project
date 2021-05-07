@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "cross-env NODE_ENV=production node server/server.js",
+    "build": "cross-env NODE_ENV=production webpack",
+    "dev": "cross-env NODE_ENV=development concurrently \"nodemon server/server.js\" \"webpack serve --open\""
   },
-  "author": "",
+  "author": "Erik Rogel, Nisa Lintakoon, Jin Qin, Alex Lee",
   "license": "ISC",
   "dependencies": {
     "concurrently": "^6.0.2",
