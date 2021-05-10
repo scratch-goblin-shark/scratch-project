@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import NavBar from "./component/Navbar";
+import NavBar from "../components/Navbar";
+import ContentContainer from "./ContentContainer";
 
 function MainContainer() {
   const [firstName, setFirstName] = useState(() => "");
@@ -11,12 +12,24 @@ function MainContainer() {
   const [emergencyContactPhone, setEmergencyContactPhone] = useState(() => 0);
   const [missedLogin, setMissedLogin] = useState(() => 0);
   const [addiction, setAddiction] = useState(() => "");
+  const [moodHistory, setMoodHistory] = useState(() => []);
+  const [isLoggedIn, setisLoggedIn] = useState(() => false);
 
   return (
     <div className="main-container">
-      <NavBar />
-
       <Router>
+      <NavBar firstName={firstName}
+              age={age}
+              emergencyContactName={emergencyContactName}
+              emergencyContactPhone={emergencyContactPhone}
+              setEmergencyContactName={setEmergencyContactName}
+              setEmergencyContactPhone={setEmergencyContactPhone}
+              missedLogin={missedLogin}
+              addiction={addiction}
+              moodHistory={moodHistory}
+              isLoggedIn={isLoggedIn}
+        />
+
         <Switch>
           <Route path="/login" exact>
             <AuthContainer
@@ -63,8 +76,9 @@ function MainContainer() {
             />
           </Route>
         </Switch>
-        <Switch>
-          <Route path="/user" exact>
+        <Switch> 
+          <Route path="/" exact>
+          
             <ContentContainer
               firstName={firstName}
               age={age}
@@ -74,6 +88,8 @@ function MainContainer() {
               setEmergencyContactPhone={setEmergencyContactPhone}
               missedLogin={missedLogin}
               addiction={addiction}
+              moodHistory={moodHistory}
+              isLoggedIn={isLoggedIn}
             />
           </Route>
         </Switch>
