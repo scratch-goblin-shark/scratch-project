@@ -2,7 +2,7 @@ import React from 'react';
 import { Nav, NavLink, Bars, NavMenu, NavBtn, NavBtnLink } from './NavBarElements'
 
 
-// isLoggedIn, firstName 
+
 function NavBar({
   setFirstName,
   setAge,
@@ -36,12 +36,12 @@ function NavBar({
          <Bars />
          <NavMenu>
          { isLoggedIn === false &&
-           <NavLink to="/user">
+           <NavLink to="/">
              Home
            </NavLink>
          }
            { isLoggedIn === true &&
-           <NavLink to="/home">
+           <NavLink to="/user">
              Dashboard
            </NavLink>
            }
@@ -53,12 +53,12 @@ function NavBar({
          </NavMenu>
            { isLoggedIn === true &&
            <NavBtn onClick={(() => logOut())} >
-           <NavBtnLink to="/sign">Log Out</NavBtnLink>
+           <NavBtnLink to="/login">Log Out</NavBtnLink>
          </NavBtn>
            }
          { isLoggedIn === false &&
          <NavBtn>
-           <NavBtnLink to="/sign">Sign In</NavBtnLink>
+           <NavBtnLink to="/login">Sign In</NavBtnLink>
          </NavBtn>
          }
         </Nav>

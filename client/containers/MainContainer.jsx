@@ -77,8 +77,7 @@ function MainContainer() {
           </Route>
         </Switch>
         <Switch> 
-          <Route path="/" exact>
-          
+          <Route path="/user" exact>
             <ContentContainer
               firstName={firstName}
               age={age}
