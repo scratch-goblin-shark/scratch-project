@@ -145,7 +145,8 @@ function Calendar({ moodHistory }) {
             const moodDate = {};
 
             moodHistory.forEach((el) => {
-              let newEl = Number(el.date.split("-")[2]);
+              let shortDate = el.date.slice(0, 10);
+              let newEl = Number(shortDate.split("-")[2]);
               moodDate[newEl] = el.mood;
             });
 
@@ -153,8 +154,8 @@ function Calendar({ moodHistory }) {
               <Day
                 key={index}
                 isGreat={moodDate[d] === "great" && month === 4}
-                isOk={moodDate[d] === "ok" && month === 4}
-                isNotGreat={moodDate[d] === "not great" && month === 4}
+                isOk={moodDate[d] === "neutral" && month === 4}
+                isNotGreat={moodDate[d] === "unwell" && month === 4}
                 isToday={d === today.getDate()}
                 isSelected={d === day}
                 onClick={() => setDate(new Date(year, month, d))}

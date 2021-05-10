@@ -50,24 +50,29 @@ function Login({
 
   return (
     <div className="login">
-      <label htmlFor="email">Email </label>
-      <input
-        id="email"
-        type="email"
-        placeholder="MyEmail@email.com"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      ></input>
-      <label htmlFor="password">Password </label>
-      <input
-        id="password"
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      ></input>
-      <button type="submit" onClick={(e) => login()}>
-        Submit
-      </button>
+      <div id="space">
+        <label htmlFor="email">Email </label>
+        <input
+          id="email"
+          type="email"
+          placeholder="MyEmail@email.com"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        ></input>
+        {/* </div>
+      <div id="space"> */}
+        <label htmlFor="password">Password </label>
+        <input
+          id="password"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        ></input>
+        {/* </div> */}
+        <button type="submit" onClick={(e) => login()}>
+          Submit
+        </button>
+      </div>
     </div>
   );
 }

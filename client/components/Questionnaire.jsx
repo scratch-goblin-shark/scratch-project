@@ -24,19 +24,28 @@ function Questionnaire({ addiction, setMoodHistory, email }) {
       <span>
         <input
           type="radio"
+          id="unwell"
           value="unwell"
+          name="mood"
           onChange={(e) => setMood(e.target.value)}
         ></input>
+        <label htmlFor="unwell">Unwell</label>
         <input
           type="radio"
+          id="neutral"
           value="neutral"
+          name="mood"
           onChange={(e) => setMood(e.target.value)}
         ></input>
+        <label htmlFor="neutral">Neutral</label>
         <input
           type="radio"
+          id="great"
           value="great"
+          name="mood"
           onChange={(e) => setMood(e.target.value)}
         ></input>
+        <label htmlFor="great">Great</label>
       </span>
       <p>Describe your day :</p>
       <textarea rows="5" cols="30"></textarea>

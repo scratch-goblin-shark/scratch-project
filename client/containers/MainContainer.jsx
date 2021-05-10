@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import NavBar from "../components/Navbar";
 import AuthContainer from "./AuthContainer";
 import ContentContainer from "./ContentContainer";
+import HomepageContainer from "../components/HomepageContainer";
 
 function MainContainer() {
   const [firstName, setFirstName] = useState(() => "");
@@ -92,11 +93,11 @@ function MainContainer() {
             />
           </Route>
         </Switch>
-        {/* <Switch>
+        <Switch>
           <Route path="/" exact>
             <HomepageContainer />
           </Route>
-        </Switch> */}
+        </Switch>
       </Router>
     </div>
   );
