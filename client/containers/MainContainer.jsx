@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import NavBar from "./component/Navbar";
+import NavBar from "../components/Navbar";
+import AuthContainer from "./AuthContainer";
+import ContentContainer from "./ContentContainer";
 
 function MainContainer() {
   const [firstName, setFirstName] = useState(() => "");
@@ -11,12 +13,13 @@ function MainContainer() {
   const [emergencyContactPhone, setEmergencyContactPhone] = useState(() => 0);
   const [missedLogin, setMissedLogin] = useState(() => 0);
   const [addiction, setAddiction] = useState(() => "");
+  const [isLoggedIn, setIsLoggedIn] = useState(() => false);
+  const [moodHistory, setMoodHistory] = useState(() => []);
 
   return (
     <div className="main-container">
-      <NavBar />
-
       <Router>
+        <NavBar />
         <Switch>
           <Route path="/login" exact>
             <AuthContainer
@@ -37,6 +40,7 @@ function MainContainer() {
               setMissedLogin={setMissedLogin}
               addiction={addiction}
               setAddiction={setAddiction}
+              setIsLoggedIn={setIsLoggedIn}
             />
           </Route>
         </Switch>
