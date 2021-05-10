@@ -1,3 +1,4 @@
+const { response } = require('express');
 const express = require('express');
 const path = require('path');
 
@@ -30,11 +31,14 @@ app.post('/signup',
   }
 );
 
-
-
-
-
-
+app.post('user/', 
+  userController.getUserID,
+  userController.saveMood,
+  userController.checkMood,
+  (request, response) => {
+    return response.status(200).json({ moodStatus: true, message: 'This person is OK.' });
+  }
+);
 
 app.get('*', (request, response) => {
   response.status(404).send('Nothing here');

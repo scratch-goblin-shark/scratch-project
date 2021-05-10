@@ -1,4 +1,4 @@
-const database;
+const database = require('../models/userModels');
 
 const userController = {};
 
@@ -48,6 +48,40 @@ userController.createUser = (request, response, next) => {
   });
 };
 
+userController.getUserID = (request, response, next) => {
+  const body = request.body;
+  const email = [body.email];
+  const getUserIDQuery = `SELECT * FROM users
+  WHERE email = $1;`;
+  database.query(getUserIDQuery, email, (error, result) => {
+    if (error) return next({ status: 500, message: 'Error in userController.getUserID.' });
+    response.locals.thisuser = result.rows;
+    response.locals.thismood = request.body.mood;
+    return next();
+  });
+}
 
+userController.saveMood = (request, response, next) => {
+  const thisuserID = [response.locals.thisuser[0].user_id];
+  const thisMood = [response.locals.thismood];
+  const saveMoodQuery = `INSERT INTO moods (mood, user_id)
+    VALUES ($1, $2);`;
+  database.query(saveMoodQuery, thisuserID, (error, result) => {
+    if (error) return next({ status: 500, message: 'Error in userController.saveMood.' });
+    return next();
+  });
+};
+
+userController.checkMood = (request, response, next) => {
+  const thisuserID = [response.locals.thisuser[0].user_id];
+  const checkMoodQuery = `SELECT mood, date FROM "public"."moods" where user_id = ${thisuserID} and date > current_date - 3;`;
+  database.query(checkMoodQuery, thisuserID, (error, result) => {
+    if (error) return next({ status: 500, message: 'Error in userController.checkMood.' });
+    if (result.rows[0].mood === "unwell" && result.rows[1].mood === "unwell" && result.rows[2].mood === "unwell"){
+      return response.status(400).json({ moodStatus: false, message: 'This person is NOT OK.' });
+    }
+    return next();
+  });
+};
 
 module.exports = userController;
