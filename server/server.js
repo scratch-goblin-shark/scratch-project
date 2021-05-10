@@ -11,6 +11,7 @@ app.use(express.json());
 app.get('/', (request, response) => {
   response.status(200).send(path.join(__dirname, '../index.html'));
 });
+
 app.get('/build', (request, response) => {
   response.status(200).send(path.join(__dirname, '../build/bundle.js'));
 })
@@ -31,9 +32,14 @@ app.post('/signup',
 );
 
 
-
-
-
+app.post('user/', 
+  userController.getUserID,
+  userController.saveMood,
+  userController.checkMood,
+  (request, response) => {
+    return response.status(200).json({ moodStatus: true, message: 'This person is OK.' });
+  }
+);
 
 
 app.get('*', (request, response) => {
@@ -54,4 +60,4 @@ app.use((error, request, response, next) => {
 });
 
 
-app.listen('http://localhost:3000')
+app.listen(3000);

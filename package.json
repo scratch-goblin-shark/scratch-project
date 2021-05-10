@@ -11,6 +11,7 @@
   "author": "Erik Rogel, Nisa Lintakoon, Jin Qin, Alex Lee",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "concurrently": "^6.0.2",
     "cross-env": "^7.0.3",
     "css-loader": "^5.2.4",
