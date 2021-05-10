@@ -39,8 +39,10 @@ function Questionnaire({ addiction, setMoodHistory, email }) {
         ></input>
       </span>
       <p>Describe your day :</p>
-      <textarea cols="5"></textarea>
-      <button type="submit" onClick={() => sendMood()}></button>
+      <textarea rows="5" cols="30"></textarea>
+      <button type="submit" onClick={() => sendMood()}>
+        Submit
+      </button>
     </div>
   );
 

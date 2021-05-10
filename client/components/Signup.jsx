@@ -1,6 +1,25 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
+export const phoneNumberify = (value) => {
+  if (!value) return value;
+
+  const phoneNumber = value.replace(/[^\d]/g, "");
+
+  const phoneNumberLength = phoneNumber.length;
+
+  if (phoneNumberLength < 4) return phoneNumber;
+
+  if (phoneNumberLength < 7) {
+    return `(${phoneNumber.slice(0, 3)})${phoneNumber.slice(3)}`;
+  }
+
+  return `(${phoneNumber.slice(0, 3)})${phoneNumber.slice(
+    3,
+    6
+  )}-${phoneNumber.slice(6, 10)}`;
+};
+
 function Signup({
   firstName,
   setFirstName,
@@ -19,32 +38,13 @@ function Signup({
 }) {
   const history = useHistory();
 
-  export const phoneNumberify = (value) => {
-    if (!value) return value;
-
-    const phoneNumber = value.replace(/[^\d]/g, "");
-
-    const phoneNumberLength = phoneNumber.length;
-
-    if (phoneNumberLength < 4) return phoneNumber;
-
-    if (phoneNumberLength < 7) {
-      return `(${phoneNumber.slice(0, 3)})${phoneNumber.slice(3)}`;
-    }
-
-    return `(${phoneNumber.slice(0, 3)})${phoneNumber.slice(
-      3,
-      6
-    )}-${phoneNumber.slice(6, 10)}`;
-  };
-
   const signup = () => {
     fetch("/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: {
+      body: JSON.stringify({
         email,
         password,
         age,
@@ -52,7 +52,7 @@ function Signup({
         emergencyContactPhone,
         addiction,
         firstName,
-      },
+      }),
     })
       .then((data) => data.json())
       .then((response) => {
@@ -69,7 +69,7 @@ function Signup({
 
   return (
     <div className="signup">
-      <label for="email">Email </label>
+      <label htmlFor="email">Email </label>
       <input
         id="email"
         type="email"
@@ -77,14 +77,14 @@ function Signup({
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       ></input>
-      <label for="password">Password </label>
+      <label htmlFor="password">Password </label>
       <input
         id="password"
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       ></input>
-      <label for="fname">First Name</label>
+      <label htmlFor="fname">First Name</label>
       <input
         id="fname"
         type="text"
@@ -92,7 +92,7 @@ function Signup({
         value={firstName}
         onChange={(e) => setFirstName(e.target.value)}
       ></input>
-      <label for="age">Age</label>
+      <label htmlFor="age">Age</label>
       <input
         id="age"
         type="number"
@@ -101,15 +101,15 @@ function Signup({
         value={age}
         onChange={(e) => setAge(e.target.value)}
       ></input>
-      <label for="ename">Emergency Contact Name</label>
+      <label htmlFor="ename">Emergency Contact Name</label>
       <input
         id="ename"
         type="text"
         value={emergencyContactName}
-        onChange={setEmergencyContactName}
+        onChange={(e) => setEmergencyContactName(e.target.value)}
         required
       ></input>
-      <label for="ephone">Emergency Contact Phone Number</label>
+      <label htmlFor="ephone">Emergency Contact Phone Number</label>
       <input
         type="tel"
         pattern="([0-9]{3})[0-9]{3}-[0-9]{4}"
@@ -127,7 +127,7 @@ function Signup({
         value="alcoholism"
         onChange={(e) => setAddiction(e.target.value)}
       />
-      <label for="alcoholism">Alcoholism</label>
+      <label htmlFor="alcoholism">Alcoholism</label>
       <br></br>
       <input
         type="radio"
@@ -136,7 +136,7 @@ function Signup({
         value="methamphetamine abuse"
         onChange={(e) => setAddiction(e.target.value)}
       />
-      <label for="methamphetamine">Methamphetamine Abuse</label>
+      <label htmlFor="methamphetamine">Methamphetamine Abuse</label>
       <br></br>
       <input
         type="radio"
@@ -145,7 +145,7 @@ function Signup({
         value="opioids abuse"
         onChange={(e) => setAddiction(e.target.value)}
       />
-      <label for="opiods">Opioids Abuse</label>
+      <label htmlFor="opiods">Opioids Abuse</label>
       <br></br>
       <input
         type="radio"
@@ -154,7 +154,7 @@ function Signup({
         value="heroine abuse"
         onChange={(e) => setAddiction(e.target.value)}
       />
-      <label for="heroine">Heroine Abuse</label>
+      <label htmlFor="heroine">Heroine Abuse</label>
       <br></br>
       <input
         type="radio"
@@ -163,7 +163,7 @@ function Signup({
         value="cocaine abuse"
         onChange={(e) => setAddiction(e.target.value)}
       />
-      <label for="cocaine">Cocaine Abuse</label>
+      <label htmlFor="cocaine">Cocaine Abuse</label>
       <br></br>
       <button type="submit" onClick={(e) => signup()}>
         Submit

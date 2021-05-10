@@ -20,12 +20,14 @@ function AuthContainer({
   setMissedLogin,
   addiction,
   setAddiction,
-  setMoodHistory
+  setMoodHistory,
+  setIsLoggedIn,
 }) {
   const renderThis = [];
   if (authtype === "signup") {
     renderThis.push(
       <Signup
+        key="signup"
         firstName={firstName}
         setFirstName={setFirstName}
         age={age}
@@ -47,6 +49,7 @@ function AuthContainer({
   } else if (authtype === "login") {
     renderThis.push(
       <Login
+        key="signup"
         setFirstName={setFirstName}
         setAge={setAge}
         email={email}

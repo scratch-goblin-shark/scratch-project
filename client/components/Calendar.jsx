@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { useState, useEffect } from 'react';
-import styled, { css } from 'styled-components';
+import * as React from "react";
+import { useState, useEffect } from "react";
+import styled, { css } from "styled-components";
 
 const Frame = styled.div`
   margin-left: 20%;
@@ -15,11 +15,11 @@ const Frame = styled.div`
 const Header = styled.div`
   font-size: 18px;
   font-weight: bold;
-  color: #FFE8C2;
+  color: #ffe8c2;
   /* padding: 10px 10px 5px 10px; */
   display: flex;
   justify-content: space-between;
-  background-color: #F0A868;
+  background-color: #f0a868;
 `;
 
 const Button = styled.div`
@@ -44,7 +44,7 @@ const Day = styled.div`
   ${(props) =>
     props.isToday &&
     css`
-      border: 1px solid #E9FFDB;
+      border: 1px solid #e9ffdb;
       background: lightgrey;
       /* border-bottom: 1px solid #6a8d73; */
     `}
@@ -53,37 +53,45 @@ const Day = styled.div`
     props.isSelected &&
     css`
       background: ;
-      
     `}
 
     ${(props) =>
     props.isGreat &&
     css`
-      background: #6A8D73;
-      
+      background: #6a8d73;
     `}
 
     ${(props) =>
     props.isOk &&
     css`
-      background: #E9FFDB;
-      
+      background: #e9ffdb;
     `}
 
     ${(props) =>
     props.isNotGreat &&
     css`
-      background: #FFE8C2;
-      
+      background: #ffe8c2;
     `}
 `;
 
-
-function Calendar({moodHistory}) {
+function Calendar({ moodHistory }) {
   const DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
   const DAYS_LEAP = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-  const DAYS_OF_THE_WEEK = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
-  const MONTHS = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+  const DAYS_OF_THE_WEEK = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
+  const MONTHS = [
+    "JAN",
+    "FEB",
+    "MAR",
+    "APR",
+    "MAY",
+    "JUN",
+    "JUL",
+    "AUG",
+    "SEP",
+    "OCT",
+    "NOV",
+    "DEC",
+  ];
 
   const today = new Date();
   const [date, setDate] = useState(today);
@@ -113,11 +121,15 @@ function Calendar({moodHistory}) {
   return (
     <Frame>
       <Header>
-        <Button onClick={() => setDate(new Date(year, month - 1, day))}>Prev</Button>
+        <Button onClick={() => setDate(new Date(year, month - 1, day))}>
+          Prev
+        </Button>
         <div>
           {MONTHS[month]} {year}
         </div>
-        <Button onClick={() => setDate(new Date(year, month + 1, day))}>Next</Button>
+        <Button onClick={() => setDate(new Date(year, month + 1, day))}>
+          Next
+        </Button>
       </Header>
       <Body>
         {DAYS_OF_THE_WEEK.map((d) => (
@@ -130,25 +142,24 @@ function Calendar({moodHistory}) {
           .map((_, index) => {
             const d = index - (startDay - 2);
 
-
             const moodDate = {};
 
             moodHistory.forEach((el) => {
-                let newEl = Number(el.date.split('-')[2]);
-                moodDate[newEl] = el.mood;
-            })
-            
+              let newEl = Number(el.date.split("-")[2]);
+              moodDate[newEl] = el.mood;
+            });
+
             return (
               <Day
                 key={index}
-                isGreat={moodDate[d] === 'great' && month === 4}
-                isOk={moodDate[d] === 'ok' && month === 4}
-                isNotGreat={moodDate[d] === 'not great' && month === 4}
+                isGreat={moodDate[d] === "great" && month === 4}
+                isOk={moodDate[d] === "ok" && month === 4}
+                isNotGreat={moodDate[d] === "not great" && month === 4}
                 isToday={d === today.getDate()}
                 isSelected={d === day}
                 onClick={() => setDate(new Date(year, month, d))}
               >
-                {d > 0 ? d : ''}  
+                {d > 0 ? d : ""}
               </Day>
             );
           })}
