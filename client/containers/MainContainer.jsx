@@ -16,10 +16,23 @@ function MainContainer() {
   const [isLoggedIn, setIsLoggedIn] = useState(() => false);
   const [moodHistory, setMoodHistory] = useState(() => []);
 
+
   return (
     <div className="main-container">
       <Router>
-        <NavBar />
+
+      <NavBar firstName={firstName}
+              age={age}
+              emergencyContactName={emergencyContactName}
+              emergencyContactPhone={emergencyContactPhone}
+              setEmergencyContactName={setEmergencyContactName}
+              setEmergencyContactPhone={setEmergencyContactPhone}
+              missedLogin={missedLogin}
+              addiction={addiction}
+              moodHistory={moodHistory}
+              isLoggedIn={isLoggedIn}
+        />
+
         <Switch>
           <Route path="/login" exact>
             <AuthContainer
@@ -62,7 +75,7 @@ function MainContainer() {
             />
           </Route>
         </Switch>
-        <Switch>
+        <Switch> 
           <Route path="/user" exact>
             <ContentContainer
               email={email}
@@ -76,6 +89,8 @@ function MainContainer() {
               addiction={addiction}
               moodHistory={moodHistory}
               setMoodHistory={setMoodHistory}
+              isLoggedIn={isLoggedIn}
+
             />
           </Route>
         </Switch>
