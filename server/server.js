@@ -18,9 +18,20 @@ app.get('/build', (request, response) => {
 
 app.post('/login',
   userController.verifyUser,
+  userController.getMoodHistory,
   userController.updateLastLoginDate,
   (request, response) => {
-    return response.status(200).json({ userVerified: true, message: 'User Found.' });
+    const responseObject = {
+      userVerified: true,
+      message: 'User Found.',
+      firstName: response.locals.user[0].firstname,
+      addiction: response.locals.user[0].addiction,
+      emergencyContactName: response.locals.user[0].emergencycontactname,
+      emergencyContactPhone: response.locals.user[0].emergencycontactphone,
+      lastLoginDate: response.locals.user[0].lastlogindate,
+      moodHistory: response.locals.userMoodHistory
+    }
+    return response.status(200).json(responseObject);
   }
 );
 
@@ -32,12 +43,12 @@ app.post('/signup',
 );
 
 
-app.post('user/', 
+app.post('/user', 
   userController.getUserID,
   userController.saveMood,
-  userController.checkMood,
+  userController.getMoodHistory,
   (request, response) => {
-    return response.status(200).json({ moodStatus: true, message: 'This person is OK.' });
+    return response.status(200).json({ moodHistory: response.locals.userMoodHistory });
   }
 );
 
