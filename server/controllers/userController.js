@@ -1,4 +1,9 @@
+
 const database = require('../models/userModels');
+
+const database;
+const bcrypt = require('bcrypt');
+
 
 const userController = {};
 
@@ -12,11 +17,13 @@ userController.verifyUser = (request, response, next) => {
     if (result.rows.length === 0) {
       return response.status(400).json({ userVerified: false, message: 'User not found. Please check email.' });
     }
-    if (result.rows[0].password !== body.password) {
-      return response.status(400).json({ userVerified: false, message: 'Password incorrect.' });
-    }
-    response.locals.user = result.rows;
-    return next();
+    bcrypt.compare(body.password, result.rows[0].password, (error, isMatched) => {
+      if (isMatched === false) {
+        return response.status(400).json({ userVerified: false, message: 'Password incorrect.' });
+      }
+      response.locals.user = result.rows;
+      return next();
+    });
   });
 };
 
@@ -31,17 +38,21 @@ userController.updateLastLoginDate = (request, response, next) => {
   });
 };
 
-userController.createUser = (request, response, next) => {
+userController.createUser = async (request, response, next) => {
   const body = request.body;
+  const saltRounds = 10;
+  const hashedPassword = await bcrypt.hash(body.password, saltRounds);
   const userInformation = [
     body.firstName,
     body.age,
     body.email,
-    body.password,
-    body.addiction
+    hashedPassword,
+    body.addiction,
+    body.emergencyContactName,
+    body.emergencyContactPhone
   ];
-  const createUserQuery = `INSERT INTO users (firstName, age, email, password, addiction)
-    VALUES ($1, $2, $3, $4, $5);`;
+  const createUserQuery = `INSERT INTO users (firstName, age, email, password, addiction, emergencyContactName, emergencyContactPhone)
+    VALUES ($1, $2, $3, $4, $5, $6, $7);`;
   database.query(createUserQuery, userInformation, (error, result) => {
     if (error) return next({ status: 500, message: 'Error in userController.createUser.' });
     return next();
