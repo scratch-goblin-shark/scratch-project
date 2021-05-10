@@ -78,7 +78,8 @@ const Day = styled.div`
     `}
 `;
 
-function Calendar() {
+
+function Calendar({moodHistory}) {
   const DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
   const DAYS_LEAP = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
   const DAYS_OF_THE_WEEK = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
@@ -129,21 +130,10 @@ function Calendar() {
           .map((_, index) => {
             const d = index - (startDay - 2);
 
-            const mood =[ 
-                { date: '2021-05-04',
-                  mood: 'great' 
-                },
-                { date: '2021-05-05',
-                  mood: 'ok'
-                },
-                { date: '2021-05-06',
-                  mood: 'not great' 
-                },
-            ]
 
             const moodDate = {};
 
-            mood.forEach((el) => {
+            moodHistory.forEach((el) => {
                 let newEl = Number(el.date.split('-')[2]);
                 moodDate[newEl] = el.mood;
             })
