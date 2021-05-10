@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import NavBar from "../components/Navbar";
 import AuthContainer from "./AuthContainer";
 import ContentContainer from "./ContentContainer";
+import HomepageContainer from "../components/HomepageContainer";
 
 function MainContainer() {
   const [firstName, setFirstName] = useState(() => "");
@@ -16,21 +17,20 @@ function MainContainer() {
   const [isLoggedIn, setIsLoggedIn] = useState(() => false);
   const [moodHistory, setMoodHistory] = useState(() => []);
 
-
   return (
     <div className="main-container">
       <Router>
-
-      <NavBar firstName={firstName}
-              age={age}
-              emergencyContactName={emergencyContactName}
-              emergencyContactPhone={emergencyContactPhone}
-              setEmergencyContactName={setEmergencyContactName}
-              setEmergencyContactPhone={setEmergencyContactPhone}
-              missedLogin={missedLogin}
-              addiction={addiction}
-              moodHistory={moodHistory}
-              isLoggedIn={isLoggedIn}
+        <NavBar
+          setFirstName={setFirstName}
+          age={age}
+          emergencyContactName={emergencyContactName}
+          emergencyContactPhone={emergencyContactPhone}
+          setEmergencyContactName={setEmergencyContactName}
+          setEmergencyContactPhone={setEmergencyContactPhone}
+          missedLogin={missedLogin}
+          addiction={addiction}
+          moodHistory={moodHistory}
+          isLoggedIn={isLoggedIn}
         />
 
         <Switch>
@@ -75,7 +75,7 @@ function MainContainer() {
             />
           </Route>
         </Switch>
-        <Switch> 
+        <Switch>
           <Route path="/user" exact>
             <ContentContainer
               email={email}
@@ -90,7 +90,6 @@ function MainContainer() {
               moodHistory={moodHistory}
               setMoodHistory={setMoodHistory}
               isLoggedIn={isLoggedIn}
-
             />
           </Route>
         </Switch>

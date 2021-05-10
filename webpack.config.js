@@ -1,4 +1,5 @@
 const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   mode: process.env.NODE_ENV,
@@ -43,8 +44,9 @@ module.exports = {
   ],
   devtool: "eval-source-map",
   devServer: {
-    publicPath: "/",
-    proxy: { //SUPER IMPORTANT
+    publicPath: "/build",
+    proxy: {
+      //SUPER IMPORTANT
       "/**": "http://localhost:3000",
       "/": "http://localhost:3000",
       "/": "http://localhost:3000",

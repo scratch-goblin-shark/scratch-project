@@ -17,6 +17,7 @@ function Login({
   setAddiction,
   setMissedLogin,
   setMoodHistory,
+  setIsLoggedIn,
 }) {
   const history = useHistory();
 
@@ -26,21 +27,21 @@ function Login({
       headers: {
         "Content-Type": "application/json",
       },
-      body: {
+      body: JSON.stringify({
         email,
         password,
-      },
+      }),
     })
       .then((data) => data.json())
       .then((data) => {
         setPassword("");
-        setAge(data.age);
         setEmergencyContactName(data.emergencyContactName);
         setEmergencyContactPhone(data.emergencyContactPhone);
         setAddiction(data.addiction);
         setFirstName(data.firstName);
         // make functionality for missed login they will send last login date
-        setMissedLogin(getDateDiff(data.lastLoginDate, Date.now()));
+        setMissedLogin(getDateDiff(new Date(data.lastLoginDate), new Date()));
+        setIsLoggedIn(true);
         setMoodHistory(data.moodHistory);
         history.push("/user");
       })
@@ -49,24 +50,29 @@ function Login({
 
   return (
     <div className="login">
-      <label for="email">Email </label>
-      <input
-        id="email"
-        type="email"
-        placeholder="MyEmail@email.com"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      ></input>
-      <label for="password">Password </label>
-      <input
-        id="password"
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      ></input>
-      <button type="submit" onClick={(e) => login()}>
-        Submit
-      </button>
+      <div id="space">
+        <label htmlFor="email">Email </label>
+        <input
+          id="email"
+          type="email"
+          placeholder="MyEmail@email.com"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        ></input>
+        {/* </div>
+      <div id="space"> */}
+        <label htmlFor="password">Password </label>
+        <input
+          id="password"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        ></input>
+        {/* </div> */}
+        <button type="submit" onClick={(e) => login()}>
+          Submit
+        </button>
+      </div>
     </div>
   );
 }

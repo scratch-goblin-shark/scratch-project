@@ -1,4 +1,3 @@
-
 import React from "react";
 import Calendar from "../components/Calendar";
 import Questionnaire from "../components/Questionnaire";
@@ -17,7 +16,7 @@ function ContentContainer({
       <div id="greeting">
         <p>Welcome back {firstName}.</p>
         <p>It's been {missedLogin} days since you've last logged on.</p>
-        <p>You can beat {addiction.toLowerCase()}. You've got this!</p>
+        <p>You can beat {addiction}. You've got this!</p>
       </div>
       <Questionnaire
         addiction={addiction}
