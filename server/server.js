@@ -11,6 +11,7 @@ app.use(express.json());
 app.get('/', (request, response) => {
   response.status(200).send(path.join(__dirname, '../index.html'));
 });
+
 app.get('/build', (request, response) => {
   response.status(200).send(path.join(__dirname, '../build/bundle.js'));
 })
@@ -30,12 +31,6 @@ app.post('/signup',
   }
 );
 
-
-
-
-
-
-
 app.get('*', (request, response) => {
   response.status(404).send('Nothing here');
 })
@@ -54,4 +49,4 @@ app.use((error, request, response, next) => {
 });
 
 
-app.listen('http://localhost:3000')
+app.listen(3000);
