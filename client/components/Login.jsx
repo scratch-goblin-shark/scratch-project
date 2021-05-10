@@ -17,6 +17,7 @@ function Login({
   setAddiction,
   setMissedLogin,
   setMoodHistory,
+  setIsLoggedIn,
 }) {
   const history = useHistory();
 
@@ -41,6 +42,7 @@ function Login({
         setFirstName(data.firstName);
         // make functionality for missed login they will send last login date
         setMissedLogin(getDateDiff(data.lastLoginDate, Date.now()));
+        setIsLoggedIn(true);
         setMoodHistory(data.moodHistory);
         history.push("/user");
       })

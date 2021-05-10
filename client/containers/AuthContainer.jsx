@@ -59,6 +59,7 @@ function AuthContainer({
         addiction={addiction}
         setAddiction={setAddiction}
         setMoodHistory={setMoodHistory}
+        setIsLoggedIn={setIsLoggedIn}
       />
     );
   }

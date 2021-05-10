@@ -43,7 +43,7 @@ module.exports = {
   ],
   devtool: "eval-source-map",
   devServer: {
-    publicPath: "/",
+    publicPath: "/build",
     proxy: { //SUPER IMPORTANT
       "/**": "http://localhost:3000",
       "/": "http://localhost:3000",
