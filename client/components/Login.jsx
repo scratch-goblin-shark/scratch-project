@@ -27,14 +27,17 @@ function Login({
       },
     })
       .then((data) => data.json())
-      .then((response) => {
+      .then((data) => {
         setPassword("");
         setAge(data.age);
         setEmergencyContactName(data.emergencyContactName);
         setEmergencyContactPhone(data.emergencyContactPhone);
         setAddiction(data.addiction);
         setFirstName(data.firstName);
-        setMissedLogin(data.missedLogin);
+        // make functionality for missed login they will send last login date
+
+        setMissedLogin(data.lastLoginDate);
+        setMoodHistory(data.moodHistory);
         history.push("/user");
       })
       .catch((e) => console.log(e));
