@@ -1,6 +1,10 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
+const getDateDiff = (date1, date2) => {
+  return Math.floor((date2.getTime() - date1.getTime()) / (1000 * 3600 * 24));
+};
+
 function Login({
   setFirstName,
   setAge,
@@ -12,6 +16,7 @@ function Login({
   setEmergencyContactPhone,
   setAddiction,
   setMissedLogin,
+  setMoodHistory,
 }) {
   const history = useHistory();
 
@@ -27,14 +32,16 @@ function Login({
       },
     })
       .then((data) => data.json())
-      .then((response) => {
+      .then((data) => {
         setPassword("");
         setAge(data.age);
         setEmergencyContactName(data.emergencyContactName);
         setEmergencyContactPhone(data.emergencyContactPhone);
         setAddiction(data.addiction);
         setFirstName(data.firstName);
-        setMissedLogin(data.missedLogin);
+        // make functionality for missed login they will send last login date
+        setMissedLogin(getDateDiff(data.lastLoginDate, Date.now()));
+        setMoodHistory(data.moodHistory);
         history.push("/user");
       })
       .catch((e) => console.log(e));

@@ -19,7 +19,7 @@ function Signup({
 }) {
   const history = useHistory();
 
-  const phoneNumberify = (value) => {
+  export const phoneNumberify = (value) => {
     if (!value) return value;
 
     const phoneNumber = value.replace(/[^\d]/g, "");

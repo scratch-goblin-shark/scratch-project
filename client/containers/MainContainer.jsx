@@ -37,23 +37,18 @@ function MainContainer() {
           <Route path="/login" exact>
             <AuthContainer
               authtype="login"
-              firstName={firstName}
               setFirstName={setFirstName}
-              age={age}
               setAge={setAge}
               email={email}
               setEmail={setEmail}
               password={password}
               setPassword={setPassword}
-              emergencyContactName={emergencyContactName}
-              emergencyContactPhone={emergencyContactPhone}
               setEmergencyContactName={setEmergencyContactName}
               setEmergencyContactPhone={setEmergencyContactPhone}
-              missedLogin={missedLogin}
               setMissedLogin={setMissedLogin}
-              addiction={addiction}
               setAddiction={setAddiction}
               setIsLoggedIn={setIsLoggedIn}
+              setMoodHistory={setMoodHistory}
             />
           </Route>
         </Switch>
@@ -83,6 +78,7 @@ function MainContainer() {
         <Switch> 
           <Route path="/user" exact>
             <ContentContainer
+              email={email}
               firstName={firstName}
               age={age}
               emergencyContactName={emergencyContactName}
@@ -92,7 +88,9 @@ function MainContainer() {
               missedLogin={missedLogin}
               addiction={addiction}
               moodHistory={moodHistory}
+              setMoodHistory={setMoodHistory}
               isLoggedIn={isLoggedIn}
+
             />
           </Route>
         </Switch>

@@ -20,6 +20,7 @@ function AuthContainer({
   setMissedLogin,
   addiction,
   setAddiction,
+  setMoodHistory
 }) {
   const renderThis = [];
   if (authtype === "signup") {
@@ -57,6 +58,7 @@ function AuthContainer({
         setMissedLogin={setMissedLogin}
         addiction={addiction}
         setAddiction={setAddiction}
+        setMoodHistory={setMoodHistory}
       />
     );
   }
