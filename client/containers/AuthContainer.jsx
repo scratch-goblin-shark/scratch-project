@@ -22,6 +22,8 @@ function AuthContainer({
   setAddiction,
   setMoodHistory,
   setIsLoggedIn,
+  zipCode,
+  setZipCode,
 }) {
   const renderThis = [];
   if (authtype === "signup") {
@@ -44,6 +46,8 @@ function AuthContainer({
         setMissedLogin={setMissedLogin}
         addiction={addiction}
         setAddiction={setAddiction}
+        zipCode = {zipCode}
+        setZipCode = {setZipCode}
       />
     );
   } else if (authtype === "login") {
@@ -63,6 +67,8 @@ function AuthContainer({
         setAddiction={setAddiction}
         setMoodHistory={setMoodHistory}
         setIsLoggedIn={setIsLoggedIn}
+        zipCode = {zipCode}
+        setZipCode = {setZipCode}
       />
     );
   }

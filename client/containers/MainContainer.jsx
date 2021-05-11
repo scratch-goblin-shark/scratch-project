@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import NavBar from "../components/Navbar";
+import NavBar from "../components/NavBar";
 import AuthContainer from "./AuthContainer";
 import ContentContainer from "./ContentContainer";
 import HomepageContainer from "../components/HomepageContainer";
@@ -16,6 +16,7 @@ function MainContainer() {
   const [addiction, setAddiction] = useState(() => "");
   const [isLoggedIn, setIsLoggedIn] = useState(() => false);
   const [moodHistory, setMoodHistory] = useState(() => []);
+  const [zipCode, setZipCode] = useState(0);
 
   return (
     <div className="main-container">
@@ -31,6 +32,8 @@ function MainContainer() {
           addiction={addiction}
           moodHistory={moodHistory}
           isLoggedIn={isLoggedIn}
+          zipCode = {zipCode}
+          setZipCode = {setZipCode}
         />
 
         <Switch>
@@ -49,6 +52,8 @@ function MainContainer() {
               setAddiction={setAddiction}
               setIsLoggedIn={setIsLoggedIn}
               setMoodHistory={setMoodHistory}
+              zipCode = {zipCode}
+              setZipCode = {setZipCode}
             />
           </Route>
         </Switch>
@@ -72,6 +77,8 @@ function MainContainer() {
               setMissedLogin={setMissedLogin}
               addiction={addiction}
               setAddiction={setAddiction}
+              zipCode = {zipCode}
+              setZipCode = {setZipCode}
             />
           </Route>
         </Switch>
@@ -90,6 +97,8 @@ function MainContainer() {
               moodHistory={moodHistory}
               setMoodHistory={setMoodHistory}
               isLoggedIn={isLoggedIn}
+              zipCode = {zipCode}
+              setZipCode = {setZipCode}
             />
           </Route>
         </Switch>

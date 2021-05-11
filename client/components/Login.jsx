@@ -18,6 +18,8 @@ function Login({
   setMissedLogin,
   setMoodHistory,
   setIsLoggedIn,
+  zipCode,
+  setZipCode,
 }) {
   const history = useHistory();
 
