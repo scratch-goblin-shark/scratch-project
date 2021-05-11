@@ -104,7 +104,19 @@ function MainContainer() {
         </Switch>
         <Switch>
           <Route path="/" exact>
-            <HomepageContainer />
+            <HomepageContainer 
+              setFirstName={setFirstName}
+              age={age}
+              emergencyContactName={emergencyContactName}
+              emergencyContactPhone={emergencyContactPhone}
+              setEmergencyContactName={setEmergencyContactName}
+              missedLogin={missedLogin}
+              addiction={addiction}
+              moodHistory={moodHistory}
+              isLoggedIn={isLoggedIn}
+              zipCode = {zipCode}
+              setEmergencyContactPhone={setEmergencyContactPhone}
+              setZipCode = {setZipCode}/>
           </Route>
         </Switch>
       </Router>
