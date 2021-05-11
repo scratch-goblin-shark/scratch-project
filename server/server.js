@@ -17,9 +17,7 @@ app.get(e, (req, res) => {
   return res.status(200).sendFile(path.join(__dirname, "../index.html"));
 }));
 
-app.get("/build", (request, response) => {
-  response.status(200).send(path.join(__dirname, "../build/bundle.js"));
-});
+app.use("/build", express.static(path.join(__dirname, "../build")));
 
 app.post(
   "/login",
