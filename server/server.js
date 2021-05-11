@@ -15,14 +15,14 @@ setInterval(() => {
   console.log('set interval is working per minute');
 }, 60 * 1000);
 
-twilio.messages
-  .create({
-    body: 'NAME reported they were feeling down. Reach out!',
-    messagingServiceSid: 'MG7fb60d87d0007c008da8c8476ed45d95',
-    to: '+19088388678',
-  })
-  .then((message) => console.log(message.sid))
-  .done();
+// twilio.messages
+//   .create({
+//     body: 'Roland reported they were feeling down. Reach out!',
+//     messagingServiceSid: 'MG7fb60d87d0007c008da8c8476ed45d95',
+//     to: '+19088388678',
+//   })
+//   .then((message) => console.log(message.sid))
+//   .done();
 
 // app.get("/", (request, response) => {
 //   response.status(200).sendFile(path.join(__dirname, "../index.html"));
