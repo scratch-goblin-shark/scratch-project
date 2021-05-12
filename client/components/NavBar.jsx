@@ -11,6 +11,7 @@ function NavBar({
   setMoodHistory,
   setIsLoggedIn,
   isLoggedIn,
+  setZipCode,
 }) {
   function logOut() {
     setFirstName("");
@@ -21,6 +22,7 @@ function NavBar({
     setAddiction("");
     setMoodHistory([]);
     setIsLoggedIn(false);
+    setZipCode(0);
   }
 
   return (

@@ -35,6 +35,8 @@ function Signup({
   setEmergencyContactPhone,
   addiction,
   setAddiction,
+  zipCode,
+  setZipCode,
 }) {
   const history = useHistory();
 
@@ -52,6 +54,7 @@ function Signup({
         emergencyContactPhone,
         addiction,
         firstName,
+        zipCode,
       }),
     })
       .then((data) => data.json())
@@ -62,6 +65,7 @@ function Signup({
         setEmergencyContactPhone("");
         setAddiction("");
         setFirstName("");
+        setZipCode(0);
         history.push("/login");
       })
       .catch((e) => console.log(e));
@@ -103,6 +107,14 @@ function Signup({
           max="99"
           value={age}
           onChange={(e) => setAge(e.target.value)}
+        ></input>
+        <label htmlFor="zipCode">ZipCode</label>
+        <input
+          id="zipCode"
+          type="number"
+          placeholder="Enter Zip Code"
+          value={zipCode}
+          onChange={(e) => setZipCode(e.target.value)}
         ></input>
         <label htmlFor="ename">Emergency Contact Name</label>
         <input
