@@ -10,6 +10,8 @@ function ContentContainer({
   addiction,
   moodHistory,
   setMoodHistory,
+  zipCode,
+  setZipCode,
 }) {
   return (
     <div className="content-container">

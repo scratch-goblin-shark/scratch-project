@@ -75,7 +75,39 @@ const Header2 = styled.div`
   transition: 0.3s;
   border-radius: 5px; /* 5px rounded corners */
 `
-function HomepageContainer() {
+const resources = [];
+function HomepageContainer({
+  setFirstName,
+  setAge,
+  setEmergencyContactName,
+  setEmergencyContactPhone,
+  setMissedLogin,
+  setAddiction,
+  setMoodHistory,
+  setIsLoggedIn,
+  isLoggedIn,
+  setZipCode,
+  zipCode,
+}) {
+
+
+    // if(isLoggedIn === true) {
+      fetch(`https://api.aa.org.au/meetings.json?postcode=${zipCode}`)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data.meetings);
+        for (let i = 0; i < 2; i++) {
+          resources.push(<div>
+            <p>Name: {data.meetings[i].title}</p>
+            <p>Address: {data.meetings[i].address}</p>
+            <p>Status: {data.meetings[i].status}</p>
+            <p>Type: {data.meetings[i].type}</p>
+          </div>);
+        }
+      })
+    // }
+
+    console.log(resources)
     return (
         <div>
             <HeaderDiv>
@@ -87,19 +119,20 @@ function HomepageContainer() {
             </HeaderDiv>
             <CardDiv>
                 <Card>
-                <Header2>
-                Resources
-                </Header2>
+                  <Header2>
+                    Resources
+                  </Header2>
                 </Card>
                 <Card>
-                <Header2>
-                Find Care
-                </Header2>
+                  <Header2>
+                    Find Care
+                  </Header2>
+                  {resources}
                 </Card>
                 <Card>
-                <Header2>
-                Ongoing Health Services
-                </Header2>
+                  <Header2>
+                    Ongoing Health Services
+                  </Header2>
                 </Card>
             </CardDiv>
         </div>
