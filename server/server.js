@@ -1,38 +1,57 @@
-const express = require("express");
-const path = require("path");
+const express = require('express');
+const path = require('path');
+const keys = require('./api_keys');
+const twilio = require('twilio')(keys.twilioAccountSid, keys.twilioAuthToken);
 
 const app = express();
 
+<<<<<<< HEAD
 const userController = require("./controllers/userController");
 const historyController = require('./controllers/historyController');
+=======
+const userController = require('./controllers/userController');
+>>>>>>> dev
 
-app.use(express.static("../client/assets"));
+app.use(express.static('../client/assets'));
 app.use(express.json());
+
+// once we have DB figured out we can query the DB every minute.
+setInterval(() => {
+  console.log('set interval is working per minute');
+}, 60 * 1000);
+
+// twilio.messages
+//   .create({
+//     body: 'Roland reported they were feeling down. Reach out!',
+//     messagingServiceSid: 'MG7fb60d87d0007c008da8c8476ed45d95',
+//     to: '+19088388678',
+//   })
+//   .then((message) => console.log(message.sid))
+//   .done();
 
 // app.get("/", (request, response) => {
 //   response.status(200).sendFile(path.join(__dirname, "../index.html"));
 // });
-
-// NTS: for whatever reason, this breaks if I try to redirect....
-const uriArr = ["/login", "/signup", "user", "/"];
+const uriArr = ['/login', '/signup', 'user', '/'];
 uriArr.map((e) =>
-app.get(e, (req, res) => {
-  return res.status(200).sendFile(path.join(__dirname, "../index.html"));
-}));
+  app.get(e, (req, res) => {
+    return res.status(200).sendFile(path.join(__dirname, '../index.html'));
+  })
+);
 
-app.use("/build", express.static(path.join(__dirname, "../build")));
+app.use('/build', express.static(path.join(__dirname, '../build')));
 
 // logs in the user, retrieves their mood history and saves today's date as their last login
 // responds with user details 
 app.post(
-  "/login",
+  '/login',
   userController.verifyUser,
   // historyController.getMoodHistory,
   // historyController.updateLastLoginDate,
   (request, response) => {
     const responseObject = {
       userVerified: true,
-      message: "User Found.",
+      message: 'User Found.',
       firstName: response.locals.user[0].firstname,
       addiction: response.locals.user[0].addiction,
       emergencyContactName: response.locals.user[0].emergencycontactname,
@@ -66,17 +85,16 @@ app.post("/user",
   }
 );
 
-// universal route handler
-app.get("*", (request, response) => {
-  response.status(404).send("Nothing here");
+app.get('*', (request, response) => {
+  response.status(404).send('Nothing here');
 });
 
 // universal error handler
 app.use((error, request, response, next) => {
   const defaultError = {
     status: 500,
-    log: "Problem in some middleware.",
-    message: "Serverside problem.",
+    log: 'Problem in some middleware.',
+    message: 'Serverside problem.',
   };
   const ourError = Object.assign(defaultError, error);
 
