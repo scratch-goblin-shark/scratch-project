@@ -1,6 +1,7 @@
 
 const database = require('../models/userModels');
 const bcrypt = require('bcrypt');
+const sendSms = require('../api/send_sms');
 
 
 const userController = {};
@@ -60,10 +61,11 @@ userController.createUser = async (request, response, next) => {
     hashedPassword,
     body.addiction,
     body.emergencyContactName,
-    body.emergencyContactPhone
+    body.emergencyContactPhone,
+    body.zipCode
   ];
-  const createUserQuery = `INSERT INTO users (firstName, age, email, password, addiction, emergencyContactName, emergencyContactPhone)
-    VALUES ($1, $2, $3, $4, $5, $6, $7);`;
+  const createUserQuery = `INSERT INTO users (firstName, age, email, password, addiction, emergencyContactName, emergencyContactPhone, zipCode)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`;
   console.log('userInfo', userInformation);
   database.query(createUserQuery, userInformation, (error, result) => {
     if (error) return next({ status: 500, message: 'Error in userController.createUser.' });
